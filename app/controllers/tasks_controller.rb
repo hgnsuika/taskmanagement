@@ -6,9 +6,7 @@ class TasksController < ApplicationController
       if logged_in?
       @task = current_user.tasks.build  
       @tasks = current_user.tasks
-    
-      
-    end
+      end
   end
 
   def show
@@ -26,9 +24,11 @@ class TasksController < ApplicationController
       redirect_to @task
       
     else
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
+      @tasks = current_user.tasks
+      # @tasks = current_user.tasks.order(id: :desc).page(params[:page])
+      
       flash.now[:danger] = 'Task が投稿されませんでした'
-      render 'toppages/index'
+      render 'tasks/index'
     end
   end
   
